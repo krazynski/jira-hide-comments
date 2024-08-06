@@ -19,22 +19,23 @@ chrome.runtime.onInstalled.addListener(() => {
         target: { tabId: tab.id },
         args: [parsed, tab],
         func: (parsed, tab) => {
-          for (let i = 0; i < parsed.length; i++) {
-            console.log(tab);
-            if (tab.url.includes("projects/" + parsed[i].name)) {
-              let comments = document.querySelectorAll(
-                `[data-testid*="comment-base-item"]`
-              );
-              comments.forEach((comment) => {
-                for (let j = 0; j < parsed[i].rules.length; j++) {
-                  let reactions = comment.querySelectorAll(
-                    `[aria-label=":${parsed[i].rules[j].emoji}:"]`
-                  );
-                  if (reactions.length > 0) {
-                    comment.style.display = "none";
+          if (tab.url.includes("selectedIssue")) {
+            for (let i = 0; i < parsed.length; i++) {
+              if (tab.url.includes("projects/" + parsed[i].name)) {
+                let comments = document.querySelectorAll(
+                  `[data-testid*="comment-base-item"]`
+                );
+                comments.forEach((comment) => {
+                  for (let j = 0; j < parsed[i].rules.length; j++) {
+                    let reactions = comment.querySelectorAll(
+                      `[aria-label=":${parsed[i].rules[j].emoji}:"]`
+                    );
+                    if (reactions.length > 0) {
+                      comment.style.display = "none";
+                    }
                   }
-                }
-              });
+                });
+              }
             }
           }
         },

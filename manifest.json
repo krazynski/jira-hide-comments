@@ -3,5 +3,6 @@
   "name": "Hide Jira Comments",
   "version": "0.0.1",
   "action": { "default_popup": "index.html" },
-  "permissions": ["storage", "scripting"]
+  "permissions": ["storage", "scripting"],
+  "host_permissions": ["https://*.atlassian.net/jira/*"]
 }

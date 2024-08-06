@@ -8,14 +8,11 @@ function App() {
 
   const saveConfig = () => {
     let value = JSON.stringify(projects);
-    chrome.storage.sync.set({ config: value }).then(() => {
-      console.log(value);
-    });
+    chrome.storage.sync.set({ config: value }).then(() => {});
   };
 
   const loadConfig = () => {
     chrome.storage.sync.get(["config"]).then((result) => {
-      console.log(result.config);
       setProjects(JSON.parse(result.config));
     });
   };

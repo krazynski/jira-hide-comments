@@ -42,7 +42,7 @@ function App() {
     setProjects(newProjects);
   }
 
-  function updateRuleName(index, ruleIndex, emoji) {
+  function updateRuleEmoji(index, ruleIndex, emoji) {
     const newProjects = [...projects];
     const newRules = [...newProjects[index].rules];
     newRules[ruleIndex].emoji = emoji;
@@ -113,7 +113,7 @@ function App() {
                           <Label>Emoji</Label>
                           <Input
                             onChange={(event) => {
-                              updateRuleName(
+                              updateRuleEmoji(
                                 index,
                                 ruleIndex,
                                 event.target.value

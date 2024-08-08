@@ -31,7 +31,9 @@ chrome.runtime.onInstalled.addListener(() => {
                       `[aria-label=":${parsed[i].rules[j].emoji}:"]`
                     );
                     if (reactions.length > 0) {
-                      comment.style.display = "none";
+                      comment.style.filter = "opacity(0.5)";
+                    } else {
+                      comment.style.filter = "none";
                     }
                   }
                 });
@@ -44,5 +46,5 @@ chrome.runtime.onInstalled.addListener(() => {
   };
   setInterval(() => {
     findCommentsWithReaction();
-  }, 5000);
+  }, 2500);
 });

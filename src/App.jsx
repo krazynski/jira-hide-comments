@@ -81,15 +81,7 @@ function App() {
   return (
     <>
       <div className="min-w-96 flex flex-col p-4">
-        <div
-          onClick={() => {
-            chrome.storage.sync.clear();
-          }}>
-          reset
-        </div>
-        <EmojiPicker />
         <div className="text-3xl font-bold">Projects</div>
-
         <div className="flex flex-col pl-2 pr-4 py-4">
           {projects.map((project, index) => {
             return (

@@ -19,7 +19,6 @@ chrome.runtime.onInstalled.addListener(() => {
         target: { tabId: tab.id },
         args: [parsed, tab],
         func: (parsed, tab) => {
-          console.log(parsed);
           if (tab.url.includes("selectedIssue")) {
             for (let i = 0; i < parsed.length; i++) {
               if (

@@ -31,7 +31,7 @@ chrome.runtime.onInstalled.addListener(() => {
                 comments.forEach((comment) => {
                   for (let j = 0; j < parsed[i].rules.length; j++) {
                     let reactions = comment.querySelectorAll(
-                      `[aria-label=":${parsed[i].rules[j].emoji}:"]`
+                      `[aria-label="${parsed[i].rules[j].emoji}"]`
                     );
                     if (reactions.length > 0) {
                       comment.style.filter = "opacity(0.5)";

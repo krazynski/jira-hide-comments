@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
-import { Label } from "../components/ui/label";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+import { getEmojis } from "@atlaskit/util-data-test/get-emojis";
 import { Plus, Save, Trash } from "lucide-react";
+import { useEffect, useState } from "react";
+import EmojiPicker from "../components/EmojiPicker";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+
+const allEmojis = getEmojis();
 
 function App() {
   const [projects, setProjects] = useState([]);
@@ -14,10 +18,12 @@ function App() {
 
   const loadConfig = () => {
     chrome.storage.sync.get(["config"]).then((result) => {
-      let parsed = JSON.parse(result.config);
+      if (result.config) {
+        let parsed = JSON.parse(result.config);
 
-      if (parsed) {
-        setProjects(parsed);
+        if (parsed) {
+          setProjects(parsed);
+        }
       }
     });
   };
@@ -68,6 +74,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(allEmojis);
     loadConfig();
   }, []);
 
@@ -80,6 +87,7 @@ function App() {
           }}>
           reset
         </div>
+        <EmojiPicker />
         <div className="text-3xl font-bold">Projects</div>
 
         <div className="flex flex-col pl-2 pr-4 py-4">
@@ -111,14 +119,10 @@ function App() {
                           key={index + "." + ruleIndex}
                           className="flex items-center gap-2">
                           <Label>Emoji</Label>
-                          <Input
-                            onChange={(event) => {
-                              updateRuleEmoji(
-                                index,
-                                ruleIndex,
-                                event.target.value
-                              );
-                            }}
+                          <EmojiPicker
+                            setValue={(newValue) =>
+                              updateRuleEmoji(index, ruleIndex, newValue)
+                            }
                             value={rule.emoji}
                           />
                           <Button

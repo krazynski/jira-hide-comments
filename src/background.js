@@ -19,9 +19,13 @@ chrome.runtime.onInstalled.addListener(() => {
         target: { tabId: tab.id },
         args: [parsed, tab],
         func: (parsed, tab) => {
+          console.log(parsed);
           if (tab.url.includes("selectedIssue")) {
             for (let i = 0; i < parsed.length; i++) {
-              if (tab.url.includes("projects/" + parsed[i].name)) {
+              if (
+                parsed[i].name.length > 0 &&
+                tab.url.includes("projects/" + parsed[i].name + "/")
+              ) {
                 let comments = document.querySelectorAll(
                   `[data-testid*="comment-base-item"]`
                 );
